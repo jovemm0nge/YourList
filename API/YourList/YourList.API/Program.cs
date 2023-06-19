@@ -1,10 +1,11 @@
+using Microsoft.EntityFrameworkCore;
 using YourList.API.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddSingleton<YourListDbContext>();
+builder.Services.AddDbContext<YourListDbContext>(x => x.UseInMemoryDatabase("YourListDB"));
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

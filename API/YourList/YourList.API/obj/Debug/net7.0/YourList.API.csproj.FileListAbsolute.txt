@@ -31,3 +31,14 @@ D:\Workspace\Angular\YourList\API\YourList\YourList.API\obj\Debug\net7.0\refint\
 D:\Workspace\Angular\YourList\API\YourList\YourList.API\obj\Debug\net7.0\YourList.API.pdb
 D:\Workspace\Angular\YourList\API\YourList\YourList.API\obj\Debug\net7.0\YourList.API.genruntimeconfig.cache
 D:\Workspace\Angular\YourList\API\YourList\YourList.API\obj\Debug\net7.0\ref\YourList.API.dll
+D:\Workspace\Angular\YourList\API\YourList\YourList.API\bin\Debug\net7.0\Npgsql.dll
+D:\Workspace\Angular\YourList\API\YourList\YourList.API\bin\Debug\net7.0\Humanizer.dll
+D:\Workspace\Angular\YourList\API\YourList\YourList.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+D:\Workspace\Angular\YourList\API\YourList\YourList.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Workspace\Angular\YourList\API\YourList\YourList.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Workspace\Angular\YourList\API\YourList\YourList.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.InMemory.dll
+D:\Workspace\Angular\YourList\API\YourList\YourList.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Workspace\Angular\YourList\API\YourList\YourList.API\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+D:\Workspace\Angular\YourList\API\YourList\YourList.API\bin\Debug\net7.0\Mono.TextTemplating.dll
+D:\Workspace\Angular\YourList\API\YourList\YourList.API\bin\Debug\net7.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\Workspace\Angular\YourList\API\YourList\YourList.API\bin\Debug\net7.0\System.CodeDom.dll

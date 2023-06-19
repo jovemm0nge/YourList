@@ -1,14 +1,35 @@
-﻿using YourList.API.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using YourList.API.Models;
 
 namespace YourList.API.Persistence
 {
-    public class YourListDbContext
+    public class YourListDbContext : DbContext
     {
-        public List<DailyTasks> DailyTasks { get; set; }
-        public YourListDbContext()
+        public DbSet<DailyTasks> DailyTasks { get; set; }
+        public DbSet<Passos> Passos { get; set; }
+
+        public YourListDbContext(DbContextOptions<YourListDbContext> Options) : base(Options)
         {
-            DailyTasks = new List<DailyTasks>();
+            
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<DailyTasks>(e =>
+            {
+                e.HasKey(x => x.Id);
+                e.Property(x => x.Titulo).IsRequired(true);
+                e.Property(x => x.Descricao)
+                    .HasMaxLength(500)
+                    .HasColumnType("varchar(500)");
+                e.HasMany(x => x.Passos)
+                    .WithOne()
+                    .HasForeignKey(x => x.DailyTaskId);
+            });
+
+            modelBuilder.Entity<Passos>(e =>
+            {
+                e.HasKey(x => x.Id);
+            });
+        }
     }
 }

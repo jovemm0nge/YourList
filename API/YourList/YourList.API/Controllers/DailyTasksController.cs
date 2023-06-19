@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using YourList.API.Models;
 using YourList.API.Persistence;
 
@@ -18,14 +19,18 @@ namespace YourList.API.Controllers
         [HttpGet]
         public IActionResult GetAll() 
         {
-            var DailyTasks = _Context.DailyTasks.Where(x => !x.Deletado).ToList();
+            var DailyTasks = _Context.DailyTasks.Where(x => !x.Deletado)
+                .Include(x => x.Passos)
+                .ToList();
             return Ok(DailyTasks);
         }
 
         [HttpGet("{Id}")]
         public IActionResult GetById(Guid Id)
         {
-            var DailyTask = _Context.DailyTasks.SingleOrDefault(x => x.Id == Id && !x.Deletado);
+            var DailyTask = _Context.DailyTasks
+                                        .Include(x => x.Passos)
+                                        .SingleOrDefault(x => x.Id == Id && !x.Deletado);
             
             if(DailyTask == null)
             {
@@ -39,6 +44,7 @@ namespace YourList.API.Controllers
         public IActionResult Post(DailyTasks DailyTasks)
         {
             _Context.DailyTasks.Add(DailyTasks);
+            _Context.SaveChanges();
 
             return CreatedAtAction(nameof(GetById), new { id = DailyTasks.Id }, DailyTasks);
         }
@@ -46,14 +52,16 @@ namespace YourList.API.Controllers
         [HttpPost("{Id}/Passos")]
         public IActionResult PostPassos(Guid Id, Passos Passos)
         {
-            var DailyTask = _Context.DailyTasks.SingleOrDefault(x => x.Id == Id && !x.Deletado);
+            Passos.DailyTaskId = Id;
+            var DailyTask = _Context.DailyTasks.Any(x => x.Id == Id && !x.Deletado);
 
-            if (DailyTask == null)
+            if (!DailyTask)
             {
                 return NotFound();
             }
 
-            DailyTask.Passos.Add(Passos);
+            _Context.Passos.Add(Passos);
+            _Context.SaveChanges();
 
             return NoContent();
         }
@@ -70,6 +78,8 @@ namespace YourList.API.Controllers
             }
 
             DailyTasks.Atualizar(DailyTasks);
+            _Context.DailyTasks.Update(DailyTask);
+            _Context.SaveChanges();
 
             return NoContent();
         }
@@ -85,6 +95,7 @@ namespace YourList.API.Controllers
             }
 
             DailyTask.Deletar();
+            _Context.SaveChanges();
 
             return Ok(DailyTask);
         }
